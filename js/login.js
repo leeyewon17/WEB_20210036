@@ -18,7 +18,9 @@ function login(){
 
     if(id.value.length === 0 || password.value.length === 0){
         alert("아이디와 비밀번호를 모두 입력해주세요.")
-    }else{
+    }
+    else{
+        session_set(); // 세션 생성
         form.submit();
     }
 }
@@ -59,5 +61,25 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
     if(get_id) { 
     id.value = get_id; 
     check.checked = true; 
+    }
+}
+
+function session_set() { //세션 저장
+    let id = document.querySelector("#floatingInput");
+    if (sessionStorage) {
+        sessionStorage.setItem("Session_Storage_test", id.value);
+
+    } 
+    else {
+        alert("로컬 스토리지 지원 x");
+    }
+}
+
+function session_get() { //세션 읽기
+    if (sessionStorage) {
+       return sessionStorage.getItem("Session_Storage_test");
+    } 
+    else {
+        alert("세션 스토리지 지원 x");
     }
 }
