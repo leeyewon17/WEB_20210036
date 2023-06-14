@@ -17,8 +17,6 @@
 // var zoomControl = new kakao.maps.ZoomControl();
 // map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-
-
 var markers = [];
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
