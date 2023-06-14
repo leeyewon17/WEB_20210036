@@ -61,7 +61,7 @@ function search_message() {
    } else {
       alert("검색을 수행합니다!");
       document.getElementById("search_message").innerHTML = search_str.value;
-      //document.querySelector("#form_main").submit();
+      document.querySelector("#form_main").submit();
 
       // 검색어를 검색어 목록 배열에 추가
       searchHistory.push(search_str.value);

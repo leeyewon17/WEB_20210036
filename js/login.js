@@ -80,6 +80,9 @@
 
 
 
+
+
+
 function login(){
     let form = document.querySelector("#form_main");
     let id = document.querySelector("#floatingInput");
@@ -215,12 +218,12 @@ function login_check() {
       alert("제대로된 패스워드와 아이디를 입력해주세요.");
    }
    
+
    else{
        session_set();
        form.submit();
    }   
 }
-
 
 
 
@@ -431,4 +434,43 @@ function getCookie(name) {
       }
    }
    return ;
+}
+
+var logoutUser = false;
+var timeoutHnd = null;
+var logouTimeInterval = 5 * 60 * 1000;
+
+function onuser_activite() { // 시간 리셋
+   if (logoutUser) {
+      ;
+   }
+   else {
+      ResetLogOutTimer();
+   }
+}
+
+function OnTimeoutReached() { // 설정 시간이 되면
+   logoutUser = true;
+   alert(" 세션의 지속 시간은 5분 입니다. 만료되면 자동으로 로그아웃 됩니다. !");
+   session_del();
+   window.location.href = "index.html";
+}
+
+function ResetLogOutTimer() { // 시간 타이머 리셋
+   clearTimeout(timeoutHnd);
+   timeoutHnd = setTimeout('OnTimeoutReached();', logouTimeInterval);
+}
+document.body.onclick = onuser_activite();
+timeoutHnd = setTimeout('OnTimeoutReached();', logouTimeInterval);
+
+//세션 삭제
+function session_del() {
+   if(sessionStorage) {
+      sessionStorage.removeItem("Session_Storage_test");
+      alert('세션 만료 확인! : 세션 스토리지를 삭제합니다.');
+      
+   }
+   else {
+      alert("세션 스토리지 지원 x");
+   }
 }
