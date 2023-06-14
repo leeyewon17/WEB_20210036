@@ -52,7 +52,8 @@ document.getElementById("search_btn").addEventListener('click', search_message);
 
 function search_message() {
    let search_str = document.querySelector("#search_txt");
-
+    let search_message = document.querySelector("#search_message");
+    
    if (search_str.value.length === 0) {
       alert("검색어가 비었습니다. 입력해주세요"); 
    } else if (containsForbiddenWord(search_str.value, forbiddenWords)) {
@@ -60,15 +61,17 @@ function search_message() {
    } else {
       alert("검색을 수행합니다!");
       document.getElementById("search_message").innerHTML = search_str.value;
-      document.querySelector("#form_main").submit();
+      //document.querySelector("#form_main").submit();
 
       // 검색어를 검색어 목록 배열에 추가
       searchHistory.push(search_str.value);
-
-      // 검색어 목록이 10개를 초과하는 경우, 맨 앞의 검색어 삭제
-      if (searchHistory.length > 10) {
+        if (searchHistory.length > 10) {
          searchHistory.shift();
       }
+      search_message.innerText = searchHistory;
+        console.log(searchHistory)
+      // 검색어 목록이 10개를 초과하는 경우, 맨 앞의 검색어 삭제
+     
    }
 }
 
